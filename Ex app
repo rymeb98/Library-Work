@@ -1,0 +1,91 @@
+install.packages("shiny")
+install.packages("bslib")
+install.packages("bsicons")
+library(shiny)
+library(bslib)
+library(bsicons)
+
+shinyApp(ui = ui, server = server)
+
+# Define UI ----
+ui <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("sidebar", position = "right"),
+  "main contents"
+)
+
+ui1 <- page_fluid(
+  layout_sidebar(
+  sidebar = sidebar("Sidebar"),
+  "Main contents"
+  )
+)
+
+ui2 <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  card(card_header("Card Header"),
+      "Card Body",
+      card_footer("Card Footer")
+  )
+)
+
+ui3 <- page_sidebar(
+  title = "title panel",
+  sidebar = sidebar("Sidebar"),
+  value_box(
+    title = "Value box",
+    value = 100,
+  showcase = bsicons::bs_icon("bar-chart"),
+  theme = "teal"),
+  card(card_header("Card Header"),
+       "Card Body",
+       card_footer("Card Footer")),
+  card("Another Card"),
+  value_box(
+    title = "Value box",
+    value = 10,
+    showcase = bsicons::bs_icon("pie-chart"),
+    theme = "blue")
+)
+
+#-------------Example
+ui.ex <- page_sidebar(
+  title = "My Shiny App",
+  sidebar = sidebar(
+    "Shiny is available on CRAN, so you can install it in the usual way from your R console:",
+    code('install.packages("shiny")'), #DONT forget the outside "", bc without it youre using the code fn on the install.packages fn
+  ),
+  card(
+    card_header("Introducing Shiny"),
+    "Shiny is a package from Posit that makes it incredibly easy to build interactive web applications with R.
+    For an introduction and live examples, visit the Shiny homepage (https://shiny.posit.co).",
+       card_image("https://sl.bing.net/cjK6OhmUxUq", height = "300px"),
+       card_footer("Shiny is a product of Posit.")
+  )
+)
+
+#Define server logic
+server.ex <- function(input, output){
+  
+}
+
+#Run the app
+shinyApp(ui = ui.ex, server = server.ex)
+
+#---------------------------------------------------------
+
+#NOTE: other interesting functions include page_navbar() which creates a multi-page user interface that includes a navigation bar.
+#and: layout_columns and layout_rows to build your layout up from a grid system
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+
+#-------------------------Widgets
+
+
